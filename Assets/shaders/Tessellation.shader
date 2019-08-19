@@ -123,8 +123,8 @@
                 
                 float d = tex2Dlod(_TessMap, float4(midUv, 0, 0)).r * ceil(nb.z - 0.3);
                 float n = floor((nb.x + nb.y) * 30) / 30;
-                float l = lerp(n - 0.1, n, _Displacement);
-                float3 disp = lerp(float3(0, 0, 0), float3(0, -5, 0), _Displacement * ceil(d) * smoothstep(n - 0.1, n, _Displacement));
+                float l = lerp(n - 0.3, n, _Displacement);
+                float3 disp = lerp(float3(0, 0, 0), float3(0, -5, 0), _Displacement * smoothstep(0.0, 0.1, d) * l);
                 GS.vertex = UnityObjectToClipPos(patch[0].vertex.xyz + disp);
                 GS.uv = TRANSFORM_TEX(patch[0].uv, _MainTex);
                 stream.Append(GS); 

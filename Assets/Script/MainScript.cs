@@ -16,10 +16,15 @@ public class MainScript : MonoBehaviour
         Dir = 1;
     }
 
+    float easeInExpo(float t, float b, float c, float d)
+    {
+        return c * Mathf.Pow(2, 10 * (t / d - 1)) + b;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        Ground.GetComponent<Renderer>().material.SetFloat("_Displacement", Disp);
+        Ground.GetComponent<Renderer>().material.SetFloat("_Displacement", easeInExpo(Disp, 0, 1, 1));
 
         Disp += 0.002f * Dir;
         if (Disp <= 0) Dir = 1;
